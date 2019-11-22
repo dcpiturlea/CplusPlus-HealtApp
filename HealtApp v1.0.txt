@@ -1,0 +1,143 @@
+#include<iostream>
+#include <iomanip>
+/*folosit pentru determinarea numarului de zecimale la calcularea kg(<<setprecision (nr zecimale)*/
+using namespace std;
+int main ()
+{
+//Afisare informatii program
+cout << "Buna ziua, acesta este un program care te poate ajuta in mod real in lupa cu kilogramele si in acelasi timp iti poate furniza cateva informatii legate de pulsul si tensiunea arteriala in functie de datele introduse de tine.\nRezultatele nu pot inlocui diagnoscul unui medic.\n\n\n";
+
+/*MENIU 2, TENSIUNEA ARTERIALA*/
+//declarare variabile
+short int varsta; 
+short int Tensiunea_Sistolica;
+short int Tensiunea_Diastolica;
+short int bpm; //nr de batai ale inimii pe minut
+string nume, sex;
+float  greutate; //greutatea in kg a utilizatorului
+float inaltime; //inaltimea in metri a utilizatorului
+float  indiceMC; //variabila indica indicele de.masa corporala care se calculeaza in functie de inaltime si greutate
+float Greutate_Ideala; //arata greutatea minima la care trebuie sa ajunga utilizatorul
+float ingrasi; //variabila arata de cate kg e nevoie sa te ingrasi ca sa ajungi la greutatea ideala
+float slabeste; //variabila arata cate kg trebuie slabesti ca sa ajungi la o greutate ideala
+string repet; // folosit pentru do while, repetitie program
+
+do
+{
+//cerere detalii
+cout << "Cum va numiti? ";
+cin >> nume ;
+cout << "Sunteti barbat(b) sau femeie(f)? ";
+cin >> sex;
+cout << "Ce varsta aveti? ";
+cin >> varsta;
+cout << "Ce inaltime aveti(m)? ";
+cin >> inaltime;
+cout << "Ce greutate aveti? ";
+cin >> greutate;
+cout << "Va rugam sa introduceti pulsul dumneavoastra (batai pe minut): ";
+cin >> bpm;
+cout << "Va rugam sa introduceti tensiunea sistolica(mmHg): ";
+cin >> Tensiunea_Sistolica;
+cout << "Va rugam sa introduceti tensiunea diastolica(mmHg): ";
+cin >> Tensiunea_Diastolica;
+
+
+/*MENIU 1, GREUTATE*/	
+
+//calculare indice corporal
+indiceMC = greutate /(inaltime * inaltime);
+slabeste = 25 * (inaltime*inaltime);
+Greutate_Ideala = greutate - slabeste;
+ingrasi = slabeste - greutate;
+//conditii indice
+	if ((sex == "f") && (indiceMC > 0) && (indiceMC < 18.5))
+	{
+	cout << setprecision (2)<<"\nSalut, " << nume << " esti prea slaba." << std::endl;
+	cout << "Trebuie sa ajungi la " << slabeste << " kg, deci trebuie sa te ingrasi " << ingrasi<< " kg";
+}
+	else if ((indiceMC > 0) && (indiceMC < 18.5))
+	{
+	cout<< setprecision (2)<< "\nSalut, " << nume << " esti prea slab.\n";
+	cout << "Trebuie sa ajungi la " << slabeste << " kg, deci trebuie sa te ingrasi " << ingrasi<< " kg";
+}
+	else if ((indiceMC >= 18.5) && (indiceMC <25))
+	{
+	cout<< setprecision (2)<< "\nSalut, " << nume << " ai o greutate normala.\n";
+}
+	else if ((indiceMC >= 25) && (indiceMC <30))
+	{
+	cout << "\nSalut, " << nume << " ai cateva kg in plus.\n";
+	cout << setprecision (2)<<"Trebuie sa ajungi la " << slabeste << " kg, deci mai ai de slabit " << Greutate_Ideala<< " kg.\n";
+}
+	else if ((indiceMC >= 30) && (indiceMC < 40))
+	{
+	cout<< setprecision (2)<< "\nSalut, " << nume << " ai multe kg in plus\nTrebuie sa ajungi la " << slabeste << " kg, deci mai ai de slabit " << Greutate_Ideala<< " kg";
+}
+	else
+	{
+indiceMC >= 40;
+	cout<< setprecision (3)<< "\nSalut, " << nume << " , ajuta-te, ai foarte, foarte multe kg in plus.\n";
+	cout << "Trebuie sa ajungi la " << slabeste <<  " kg, deci mai ai de slabit " << Greutate_Ideala << " kg.\n";
+	}
+//Verificare tensiune,puls
+//conditii puls
+	if (bpm > 90)
+	{
+	cout << "Pulsul dumneavoastra este destul de ridicat, un puls normal ar trebui sa se incadreze in intervalul 60-90bpm.\n";
+}
+	else if (bpm < 60)
+	{
+	cout << "Pulsul dumneavoastra este mai mic decat ar trebui, un puls normal ar trebui sa se incadreze in intervalul 60-90bpm.\n";
+}
+	else
+	{
+	cout << "Pulsul dumneavoastra este unul normal.\n";
+}
+//VARSTA PANA 20 ANI
+	if (varsta < 20)
+	{
+		if ((Tensiunea_Diastolica > 40 && 	Tensiunea_Diastolica  < 75) || (Tensiunea_Sistolica > 65 && Tensiunea_Sistolica  < 105))
+		{
+cout << "Tensiunea dumneavoastra este mare.|\n\n";
+}
+		else if ((Tensiunea_Diastolica > 60 && Tensiunea_Diastolica  < 77) || (Tensiunea_Sistolica > 105 && Tensiunea_Sistolica  < 117)) 
+	{
+cout << "Tensiunea dumneavoastra este peste media normala(aprox 120/70).\n\n";
+}
+		else if ((Tensiunea_Diastolica > 77 && Tensiunea_Diastolica  < 85) || (Tensiunea_Sistolica > 117 && Tensiunea_Sistolica  < 130))
+		{
+cout << "Tensiunea dumneavoastra este mult peste media normala(120/70).\n\n";
+}
+
+	else
+	{
+cout << "Tensiunea dumneavoastra este foarte mare .\n\n";
+}
+}
+//VARSTA 20-40 ANI
+	if (varsta >=20 && varsta <40)
+	{
+		if ((Tensiunea_Diastolica >50 && Tensiunea_Diastolica  < 65) || (Tensiunea_Sistolica > 90 && Tensiunea_Sistolica  < 115)) 
+	{
+cout << "Tensiune mica pentru varsta grupa dumneavoastra de varsta(20-40 ani)\n\n";
+}
+		else if ((Tensiunea_Diastolica > 65 && Tensiunea_Diastolica  < 85) || (Tensiunea_Sistolica >  115 && Tensiunea_Sistolica  < 129))
+		{
+cout << "Tensiune normala pentru varsta grupa dumneavoastra de varsta(20-40 ani)\n\n";
+}
+		else if ((Tensiunea_Diastolica > 85 && Tensiunea_Diastolica  < 100) || (Tensiunea_Sistolica >=130 && Tensiunea_Sistolica  < 190))
+		{
+cout << "Tensiune peste limita pentru grupa dumneavoastra de varsta (20-40 ani).\n\n";
+}
+
+	else
+	{
+cout << "Eroare...Posibil ca anumite valori ale tensiunii introduse sa fie eronate.\n\n";
+}
+}
+cout << "\n\nDaca doriti sa introduceti alte date va rugam sa tastati DA si sa apasati enter, altfel introduceti NU.\n\n";
+        cin >> repet;
+}while (repet == "DA" || repet == "da");
+return 0;
+}
